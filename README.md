@@ -1,6 +1,6 @@
 # FULL IDOR WORKFLOW (Production‑Grade)
 
-## 🧠 IDOR Core Rule
+## IDOR Core Rule
 
 > **If an application uses object identifiers, authorization must be enforced on every request.**
 
