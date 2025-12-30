@@ -1,4 +1,4 @@
-# 🔐 FULL IDOR WORKFLOW (Production‑Grade)
+# FULL IDOR WORKFLOW (Production‑Grade)
 
 ## 🧠 IDOR Core Rule
 
