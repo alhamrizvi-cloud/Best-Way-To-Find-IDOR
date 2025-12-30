@@ -1,9 +1,3 @@
-Perfect 👍
-Below is a **FULL, END‑TO‑END IDOR WORKFLOW** (no XSS, no noise) that **real bug hunters actually use**.
-Bookmark this — this is a **complete playbook**.
-
----
-
 # 🔐 FULL IDOR WORKFLOW (Production‑Grade)
 
 ## 🧠 IDOR Core Rule
