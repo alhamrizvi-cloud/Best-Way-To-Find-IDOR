@@ -6,8 +6,6 @@
 
 Your job: **change the ID → observe access control failure**
 
----
-
 ## 🧰 TOOLS USED
 
 * katana
@@ -21,7 +19,6 @@ Your job: **change the ID → observe access control failure**
 * httpx
 * jq (for API testing)
 
----
 
 ## 1️⃣ Collect MAX URLs (live + historical)
 
@@ -48,7 +45,6 @@ cat monzolive.txt | waybackurls | anew all_urls.txt
 cat monzolive.txt | hakrawler -depth 3 -plain | anew all_urls.txt
 ```
 
----
 
 ## 2️⃣ Extract URLs with parameters
 
@@ -56,7 +52,6 @@ cat monzolive.txt | hakrawler -depth 3 -plain | anew all_urls.txt
 grep "?" all_urls.txt | anew params_raw.txt
 ```
 
----
 
 ## 3️⃣ Normalize & dedupe (mandatory)
 
@@ -64,7 +59,6 @@ grep "?" all_urls.txt | anew params_raw.txt
 cat params_raw.txt | uro | anew params_clean.txt
 ```
 
----
 
 ## 4️⃣ Extract **IDOR‑relevant parameters**
 
@@ -75,8 +69,6 @@ params_clean.txt > idor_candidates.txt
 ```
 
 📁 Output: `idor_candidates.txt`
-
----
 
 ## 5️⃣ Discover hidden ID parameters (Arjun)
 
@@ -90,7 +82,6 @@ Merge:
 cat arjun_ids.txt | anew idor_candidates.txt
 ```
 
----
 
 ## 6️⃣ Focus on **numeric object references**
 
@@ -103,8 +94,6 @@ Why:
 * Most IDORs use integers
 * UUIDs are harder but still testable
 
----
-
 ## 7️⃣ Generate IDOR mutation payloads
 
 ### Replace ID values
@@ -113,7 +102,6 @@ Why:
 cat idor_candidates.txt | qsreplace 1 2 10 100 999 1000 > idor_fuzzed.txt
 ```
 
----
 
 ## 8️⃣ Send requests & capture differences
 
@@ -127,7 +115,6 @@ cat idor_fuzzed.txt | httpx -silent -status-code -content-length > idor_response
 * `200 OK` for unauthorized object
 * Sensitive JSON fields visible
 
----
 
 ## 9️⃣ API‑specific IDOR testing (IMPORTANT)
 
@@ -184,7 +171,6 @@ Test same request with:
 3. No auth token
 
 IDOR exists if **A accesses B’s object**
--
 
 ## 1️⃣2️⃣ Manual confirmation (MANDATORY)
 
@@ -195,7 +181,6 @@ Before reporting:
 * Show unauthorized data
 * Show impact (PII, account takeover, modification)
 
----
 
 ## 🧪 Real‑World IDOR Examples
 
@@ -220,7 +205,6 @@ Before reporting:
 * Mobile APIs = IDOR goldmine
 * Always test **vertical + horizontal access**
 
----
 
 ## 🏁 Final IDOR File Map
 ```
